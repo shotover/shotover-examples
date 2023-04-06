@@ -1,0 +1,13 @@
+[package]
+name = "tests"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+scylla = "0.8.0"
+serial_test = "2.0.0"
+docker-compose-runner = { git = "https://github.com/shotover/docker-compose-runner" }
+tokio = { version = "1.27.0", features = ["rt-multi-thread"] }
+redis = { version = "0.23.0", features = ["tokio-comp", "cluster", "cluster-async"] }
