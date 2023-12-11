@@ -54,3 +54,19 @@ async fn redis_cluster_1_many() {
     )
     .await;
 }
+
+#[tokio::test(flavor = "multi_thread")]
+#[serial]
+async fn redis_backup_cluster() {
+    let _compose = docker_compose("../redis-backup-cluster/docker-compose.yaml");
+
+    let mut connection = redis_single_connection("172.16.1.4:6379").await;
+
+    assert_ok(redis::cmd("SET").arg("foo").arg("value"), &mut connection).await;
+    assert_bytes(
+        redis::cmd("GET").arg("foo"),
+        &mut connection,
+        "value".as_bytes(),
+    )
+    .await;
+}
