@@ -1,0 +1,38 @@
+---
+sources:
+  - Redis:
+      name: redis
+      listen_addr: "0.0.0.0:6379"
+      chain:
+        - Tee:
+            behavior: Ignore
+            buffer_size: 10000
+            chain:
+            # drop read requests to the backup cluster.
+            # This is needed for performance not correctness as the Tee would drop the actual read response anyway.
+            - QueryTypeFilter:
+                DenyList: [Read]
+            # submit requests to the backup cluster in batches of 2000 requests.
+            # this is another performance boost as it amortizes the cost of submitting a message.
+            - Coalesce:
+                flush_when_buffered_message_count: 2000
+                flush_when_millis_since_last_flush: 100
+            # and finally send the requests and receive their responses from the backup cluster.
+            - RedisSinkCluster:
+                first_contact_points:
+                  - "172.16.1.20:6379"
+                  - "172.16.1.21:6379"
+                  - "172.16.1.22:6379"
+                  - "172.16.1.23:6379"
+                  - "172.16.1.24:6379"
+                  - "172.16.1.25:6379"
+                connect_timeout_ms: 3000
+        - RedisSinkCluster:
+            first_contact_points:
+              - "172.16.1.10:6379"
+              - "172.16.1.11:6379"
+              - "172.16.1.12:6379"
+              - "172.16.1.13:6379"
+              - "172.16.1.14:6379"
+              - "172.16.1.15:6379"
+            connect_timeout_ms: 3000
