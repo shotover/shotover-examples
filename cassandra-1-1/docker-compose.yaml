@@ -1,5 +1,3 @@
-version: "3.3"
-
 networks:
   cassandra_subnet:
     name: cassandra_subnet
@@ -16,8 +14,7 @@ services:
     networks:
       cassandra_subnet:
         ipv4_address: 172.16.1.2
-    environment:
-      &environment
+    environment: &environment
       CASSANDRA_SEEDS: "cassandra-one,cassandra-two,cassandra-three"
       MAX_HEAP_SIZE: "400M"
       MIN_HEAP_SIZE: "400M"
@@ -41,7 +38,7 @@ services:
     restart: always
     depends_on:
       - cassandra-one
-    image: shotover/shotover-proxy:v0.2.0
+    image: shotover/shotover-proxy:v0.4.1
     network_mode: "service:cassandra-one"
     volumes:
       - .:/config
@@ -50,7 +47,7 @@ services:
     restart: always
     depends_on:
       - cassandra-two
-    image: shotover/shotover-proxy:v0.2.0
+    image: shotover/shotover-proxy:v0.4.1
     network_mode: "service:cassandra-two"
     volumes:
       - .:/config
@@ -59,7 +56,7 @@ services:
     restart: always
     depends_on:
       - cassandra-three
-    image: shotover/shotover-proxy:v0.2.0
+    image: shotover/shotover-proxy:v0.4.1
     network_mode: "service:cassandra-three"
     volumes:
       - .:/config

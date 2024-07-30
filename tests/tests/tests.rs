@@ -11,7 +11,7 @@ fn docker_compose(yaml_path: &str) -> DockerCompose {
 
 pub const IMAGE_WAITERS: [Image; 3] = [
     Image {
-        name: "shotover/shotover-proxy:v0.2.0",
+        name: "shotover/shotover-proxy:v0.4.1",
         log_regex_to_wait_for: r"accepting inbound connections",
         timeout: Duration::from_secs(120),
     },

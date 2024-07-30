@@ -43,7 +43,7 @@ async fn cassandra_1_many() {
 
 async fn cassandra_connection(address: &str) -> Session {
     SessionBuilder::new()
-        .known_nodes(&[address])
+        .known_nodes([address])
         .user("cassandra", "cassandra")
         .build()
         .await
