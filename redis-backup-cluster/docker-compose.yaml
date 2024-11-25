@@ -192,7 +192,7 @@ services:
         condition: service_healthy
       redis-node-backup-5:
         condition: service_healthy
-    image: shotover/shotover-proxy:v0.4.1
+    image: shotover/shotover-proxy:v0.5.3
     volumes:
       - .:/config
 
