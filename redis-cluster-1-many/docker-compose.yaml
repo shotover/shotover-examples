@@ -1,4 +1,3 @@
-version: '3.3'
 services:
   redis-node-0:
     image: bitnami/redis-cluster:6.0-debian-10
@@ -8,8 +7,7 @@ services:
     environment:
       - 'ALLOW_EMPTY_PASSWORD=yes'
       - 'REDIS_NODES=redis-node-0 redis-node-1 redis-node-2 redis-node-3 redis-node-4 redis-node-5'
-    healthcheck:
-      &healthcheck
+    healthcheck: &healthcheck
       test:
         [
           "CMD-SHELL",
@@ -110,7 +108,7 @@ services:
         condition: service_healthy
       redis-node-5:
         condition: service_healthy
-    image: shotover/shotover-proxy:v0.2.0
+    image: shotover/shotover-proxy:v0.4.1
     volumes:
       - .:/config
 

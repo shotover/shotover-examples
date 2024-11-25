@@ -1,8 +1,6 @@
 # Shotover Examples
 
-The goal is to house example configs that run on the latest shotover release.
-
-I'm just going to keep force pushing till I have something interesting here
+This repo provides example usages of shotover in various use cases.
 
 ## redis-backup-cluster
 
@@ -10,5 +8,6 @@ This example demonstrates how to setup shotover to maintain a redis backup clust
 This is suitable for use cases where the data does not need to be 100% consistent between clusters but the service must not go down.
 
 Shotover proxies messages to two distinct redis clusters:
+
 * primary cluster - shotover reads and writes to this cluster
 * backup cluster - all writes are duplicated to the backup cluster
