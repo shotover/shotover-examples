@@ -12,22 +12,22 @@ pub async fn assert_bytes(cmd: &mut Cmd, connection: &mut MultiplexedConnection,
     assert_eq!(cmd.query_async(connection).await, Ok(value.to_vec()));
 }
 
-pub async fn redis_cluster_connection(address: &str) -> redis::cluster_async::ClusterConnection {
+pub async fn valkey_cluster_connection(address: &str) -> redis::cluster_async::ClusterConnection {
     let client = ClusterClient::new(vec![address]).unwrap();
     client.get_async_connection().await.unwrap()
 }
 
-pub async fn redis_single_connection(address: &str) -> redis::aio::MultiplexedConnection {
+pub async fn valkey_single_connection(address: &str) -> redis::aio::MultiplexedConnection {
     let client = redis::Client::open(address).unwrap();
     client.get_multiplexed_tokio_connection().await.unwrap()
 }
 
 #[tokio::test(flavor = "multi_thread")]
 #[serial]
-async fn redis_cluster_1_1() {
+async fn valkey_cluster_1_1() {
     let _compose = docker_compose("../redis-cluster-1-1/docker-compose.yaml");
 
-    let mut connection = redis_cluster_connection("redis://172.16.1.2:6380").await;
+    let mut connection = valkey_cluster_connection("redis://172.16.1.2:6380").await;
 
     let _: () = connection.set("foo", 42).await.unwrap();
     let value: i32 = connection.get("foo").await.unwrap();
@@ -36,10 +36,10 @@ async fn redis_cluster_1_1() {
 
 #[tokio::test(flavor = "multi_thread")]
 #[serial]
-async fn redis_cluster_1_many() {
+async fn valkey_cluster_1_many() {
     let _compose = docker_compose("../redis-cluster-1-many/docker-compose.yaml");
 
-    let mut connection = redis_single_connection("redis://172.16.1.9:6379").await;
+    let mut connection = valkey_single_connection("redis://172.16.1.9:6379").await;
 
     assert_ok(redis::cmd("SET").arg("foo").arg("value"), &mut connection).await;
     assert_bytes(
@@ -52,10 +52,10 @@ async fn redis_cluster_1_many() {
 
 #[tokio::test(flavor = "multi_thread")]
 #[serial]
-async fn redis_backup_cluster() {
+async fn valkey_backup_cluster() {
     let _compose = docker_compose("../redis-backup-cluster/docker-compose.yaml");
 
-    let mut connection = redis_single_connection("redis://172.16.1.4:6379").await;
+    let mut connection = valkey_single_connection("redis://172.16.1.4:6379").await;
 
     assert_ok(redis::cmd("SET").arg("foo").arg("value"), &mut connection).await;
     assert_bytes(

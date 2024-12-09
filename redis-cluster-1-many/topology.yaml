@@ -1,12 +1,12 @@
 ---
 sources:
-    # define how shotover listens for incoming connections from our client application (`redis-benchmark`).
-  - Redis:
-      name: redis
+    # define how shotover listens for incoming connections from our client application (`valkey-benchmark`).
+  - Valkey:
+      name: valkey
       listen_addr: "0.0.0.0:6379"
       chain:
-        # configure Shotover to connect to the Redis cluster via our defined contact points
-        - RedisSinkCluster:
+        # configure Shotover to connect to the Valkey cluster via our defined contact points
+        - ValkeySinkCluster:
             first_contact_points:
               - "172.16.1.2:6379"
               - "172.16.1.3:6379"
