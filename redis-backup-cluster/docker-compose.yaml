@@ -1,198 +1,178 @@
 services:
-  redis-node-primary-0:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-primary-0:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.10
     environment: &environment_primary
       - 'ALLOW_EMPTY_PASSWORD=yes'
-      - 'REDIS_NODES=redis-node-primary-0 redis-node-primary-1 redis-node-primary-2'
+      - 'VALKEY_NODES=valkey-node-primary-0 valkey-node-primary-1 valkey-node-primary-2'
     healthcheck: &healthcheck_primary
-      test:
-        [
-          "CMD-SHELL",
-          "OUT=`redis-cli cluster slots`;
-          echo $$OUT | grep 172.16.1.10 || exit 1;
-          echo $$OUT | grep 172.16.1.11 || exit 1;
-          echo $$OUT | grep 172.16.1.12 || exit 1;
-          echo $$OUT | grep 172.16.1.13 || exit 1;
-          echo $$OUT | grep 172.16.1.14 || exit 1;
-          echo $$OUT | grep 172.16.1.15 || exit 1;"
-        ]
+      test: [ "CMD-SHELL", "OUT=`valkey-cli cluster slots`; echo $$OUT | grep 172.16.1.10 || exit 1; echo $$OUT | grep 172.16.1.11 || exit 1; echo $$OUT | grep 172.16.1.12 || exit 1; echo $$OUT | grep 172.16.1.13 || exit 1; echo $$OUT | grep 172.16.1.14 || exit 1; echo $$OUT | grep 172.16.1.15 || exit 1;" ]
       interval: 1s
       timeout: 3s
       retries: 30
 
-  redis-node-primary-1:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-primary-1:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.11
     environment: *environment_primary
     healthcheck: *healthcheck_primary
 
-  redis-node-primary-2:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-primary-2:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.12
     environment: *environment_primary
     healthcheck: *healthcheck_primary
 
-  redis-node-primary-3:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-primary-3:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.13
     environment: *environment_primary
     healthcheck: *healthcheck_primary
 
-  redis-node-primary-4:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-primary-4:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.14
     environment: *environment_primary
     healthcheck: *healthcheck_primary
 
-  redis-node-primary-5:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-primary-5:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.15
     environment: *environment_primary
     healthcheck: *healthcheck_primary
 
-  redis-node-backup-0:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-backup-0:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.20
     environment: &environment_backup
       - 'ALLOW_EMPTY_PASSWORD=yes'
-      - 'REDIS_NODES=redis-node-backup-0 redis-node-backup-1 redis-node-backup-2'
+      - 'VALKEY_NODES=valkey-node-backup-0 valkey-node-backup-1 valkey-node-backup-2'
     healthcheck: &healthcheck_backup
-      test:
-        [
-          "CMD-SHELL",
-          "OUT=`redis-cli cluster slots`;
-          echo $$OUT | grep 172.16.1.20 || exit 1;
-          echo $$OUT | grep 172.16.1.21 || exit 1;
-          echo $$OUT | grep 172.16.1.22 || exit 1;
-          echo $$OUT | grep 172.16.1.23 || exit 1;
-          echo $$OUT | grep 172.16.1.24 || exit 1;
-          echo $$OUT | grep 172.16.1.25 || exit 1;"
-        ]
+      test: [ "CMD-SHELL", "OUT=`valkey-cli cluster slots`; echo $$OUT | grep 172.16.1.20 || exit 1; echo $$OUT | grep 172.16.1.21 || exit 1; echo $$OUT | grep 172.16.1.22 || exit 1; echo $$OUT | grep 172.16.1.23 || exit 1; echo $$OUT | grep 172.16.1.24 || exit 1; echo $$OUT | grep 172.16.1.25 || exit 1;" ]
       interval: 1s
       timeout: 3s
       retries: 30
 
-  redis-node-backup-1:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-backup-1:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.21
     environment: *environment_backup
     healthcheck: *healthcheck_backup
 
-  redis-node-backup-2:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-backup-2:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.22
     environment: *environment_backup
     healthcheck: *healthcheck_backup
 
-  redis-node-backup-3:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-backup-3:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.23
     environment: *environment_backup
     healthcheck: *healthcheck_backup
 
-  redis-node-backup-4:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-backup-4:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.24
     environment: *environment_backup
     healthcheck: *healthcheck_backup
 
-  redis-node-backup-5:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-node-backup-5:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.25
     environment: *environment_backup
     healthcheck: *healthcheck_backup
 
-  redis-cluster-init-primary:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-cluster-init-primary:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.2
     depends_on:
-      - redis-node-primary-0
-      - redis-node-primary-1
-      - redis-node-primary-2
-      - redis-node-primary-3
-      - redis-node-primary-4
-      - redis-node-primary-5
+      - valkey-node-primary-0
+      - valkey-node-primary-1
+      - valkey-node-primary-2
+      - valkey-node-primary-3
+      - valkey-node-primary-4
+      - valkey-node-primary-5
     environment:
       - 'ALLOW_EMPTY_PASSWORD=yes'
-      - 'REDIS_CLUSTER_REPLICAS=1'
-      - 'REDIS_NODES=redis-node-primary-0 redis-node-primary-1 redis-node-primary-2 redis-node-primary-3 redis-node-primary-4 redis-node-primary-5'
-      - 'REDIS_CLUSTER_CREATOR=yes'
+      - 'VALKEY_CLUSTER_REPLICAS=1'
+      - 'VALKEY_NODES=valkey-node-primary-0 valkey-node-primary-1 valkey-node-primary-2 valkey-node-primary-3 valkey-node-primary-4 valkey-node-primary-5'
+      - 'VALKEY_CLUSTER_CREATOR=yes'
 
-  redis-cluster-init-backup:
-    image: bitnami/redis-cluster:6.0-debian-10
+  valkey-cluster-init-backup:
+    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.3
     depends_on:
-      - redis-node-backup-0
-      - redis-node-backup-1
-      - redis-node-backup-2
-      - redis-node-backup-3
-      - redis-node-backup-4
-      - redis-node-backup-5
+      - valkey-node-backup-0
+      - valkey-node-backup-1
+      - valkey-node-backup-2
+      - valkey-node-backup-3
+      - valkey-node-backup-4
+      - valkey-node-backup-5
     environment:
       - 'ALLOW_EMPTY_PASSWORD=yes'
-      - 'REDIS_CLUSTER_REPLICAS=1'
-      - 'REDIS_NODES=redis-node-backup-0 redis-node-backup-1 redis-node-backup-2 redis-node-backup-3 redis-node-backup-4 redis-node-backup-5'
-      - 'REDIS_CLUSTER_CREATOR=yes'
+      - 'VALKEY_CLUSTER_REPLICAS=1'
+      - 'VALKEY_NODES=valkey-node-backup-0 valkey-node-backup-1 valkey-node-backup-2 valkey-node-backup-3 valkey-node-backup-4 valkey-node-backup-5'
+      - 'VALKEY_CLUSTER_CREATOR=yes'
 
   shotover-0:
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.4
     depends_on:
-      redis-node-primary-0:
+      valkey-node-primary-0:
         condition: service_healthy
-      redis-node-primary-1:
+      valkey-node-primary-1:
         condition: service_healthy
-      redis-node-primary-2:
+      valkey-node-primary-2:
         condition: service_healthy
-      redis-node-primary-3:
+      valkey-node-primary-3:
         condition: service_healthy
-      redis-node-primary-4:
+      valkey-node-primary-4:
         condition: service_healthy
-      redis-node-primary-5:
+      valkey-node-primary-5:
         condition: service_healthy
-      redis-node-backup-0:
+      valkey-node-backup-0:
         condition: service_healthy
-      redis-node-backup-1:
+      valkey-node-backup-1:
         condition: service_healthy
-      redis-node-backup-2:
+      valkey-node-backup-2:
         condition: service_healthy
-      redis-node-backup-3:
+      valkey-node-backup-3:
         condition: service_healthy
-      redis-node-backup-4:
+      valkey-node-backup-4:
         condition: service_healthy
-      redis-node-backup-5:
+      valkey-node-backup-5:
         condition: service_healthy
-    image: shotover/shotover-proxy:v0.5.3
+    image: shotover/shotover-proxy:v0.6.0
     volumes:
       - .:/config
 

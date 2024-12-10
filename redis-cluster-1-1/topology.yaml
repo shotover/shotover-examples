@@ -1,11 +1,11 @@
 ---
 sources:
-  - Redis:
-      name: redis
+  - Valkey:
+      name: valkey
       listen_addr: "0.0.0.0:6380"
       chain:
-        - RedisClusterPortsRewrite:
+        - ValkeyClusterPortsRewrite:
              new_port: 6380
-        - RedisSinkSingle:
+        - ValkeySinkSingle:
             remote_address: "0.0.0.0:6379"
             connect_timeout_ms: 3000
