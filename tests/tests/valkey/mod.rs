@@ -25,7 +25,7 @@ pub async fn valkey_single_connection(address: &str) -> redis::aio::MultiplexedC
 #[tokio::test(flavor = "multi_thread")]
 #[serial]
 async fn valkey_cluster_1_1() {
-    let _compose = docker_compose("../redis-cluster-1-1/docker-compose.yaml");
+    let _compose = docker_compose("../valkey-cluster-1-1/docker-compose.yaml");
 
     let mut connection = valkey_cluster_connection("redis://172.16.1.2:6380").await;
 
@@ -37,7 +37,7 @@ async fn valkey_cluster_1_1() {
 #[tokio::test(flavor = "multi_thread")]
 #[serial]
 async fn valkey_cluster_1_many() {
-    let _compose = docker_compose("../redis-cluster-1-many/docker-compose.yaml");
+    let _compose = docker_compose("../valkey-cluster-1-many/docker-compose.yaml");
 
     let mut connection = valkey_single_connection("redis://172.16.1.9:6379").await;
 
@@ -53,7 +53,7 @@ async fn valkey_cluster_1_many() {
 #[tokio::test(flavor = "multi_thread")]
 #[serial]
 async fn valkey_backup_cluster() {
-    let _compose = docker_compose("../redis-backup-cluster/docker-compose.yaml");
+    let _compose = docker_compose("../valkey-backup-cluster/docker-compose.yaml");
 
     let mut connection = valkey_single_connection("redis://172.16.1.4:6379").await;
 
