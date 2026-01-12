@@ -37,9 +37,9 @@ async fn cassandra_1_many() {
         .rows_stream::<(i32,)>()
         .unwrap();
     let results: Vec<_> = iter.collect().await;
-    let results: Vec<_> = results.into_iter().map(|x| x.unwrap().0).collect();
+    let results: Vec<i32> = results.into_iter().map(|x| x.unwrap().0).collect();
 
-    assert_eq!(results, [])
+    assert_eq!(results, &[] as &[i32])
 }
 
 async fn cassandra_connection(address: &str) -> Session {
