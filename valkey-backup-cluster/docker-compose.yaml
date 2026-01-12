@@ -1,6 +1,6 @@
 services:
   valkey-node-primary-0:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.10
@@ -14,7 +14,7 @@ services:
       retries: 30
 
   valkey-node-primary-1:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.11
@@ -22,7 +22,7 @@ services:
     healthcheck: *healthcheck_primary
 
   valkey-node-primary-2:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.12
@@ -30,7 +30,7 @@ services:
     healthcheck: *healthcheck_primary
 
   valkey-node-primary-3:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.13
@@ -38,7 +38,7 @@ services:
     healthcheck: *healthcheck_primary
 
   valkey-node-primary-4:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.14
@@ -46,7 +46,7 @@ services:
     healthcheck: *healthcheck_primary
 
   valkey-node-primary-5:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.15
@@ -54,7 +54,7 @@ services:
     healthcheck: *healthcheck_primary
 
   valkey-node-backup-0:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.20
@@ -68,7 +68,7 @@ services:
       retries: 30
 
   valkey-node-backup-1:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.21
@@ -76,7 +76,7 @@ services:
     healthcheck: *healthcheck_backup
 
   valkey-node-backup-2:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.22
@@ -84,7 +84,7 @@ services:
     healthcheck: *healthcheck_backup
 
   valkey-node-backup-3:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.23
@@ -92,7 +92,7 @@ services:
     healthcheck: *healthcheck_backup
 
   valkey-node-backup-4:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.24
@@ -100,7 +100,7 @@ services:
     healthcheck: *healthcheck_backup
 
   valkey-node-backup-5:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.25
@@ -108,7 +108,7 @@ services:
     healthcheck: *healthcheck_backup
 
   valkey-cluster-init-primary:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.2
@@ -126,7 +126,7 @@ services:
       - 'VALKEY_CLUSTER_CREATOR=yes'
 
   valkey-cluster-init-backup:
-    image: bitnami/valkey-cluster:7.2.5-debian-12-r4
+    image: bitnamilegacy/valkey-cluster:7.2.5-debian-12-r4
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.3
