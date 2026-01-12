@@ -1,5 +1,5 @@
 mod cassandra;
-mod redis;
+mod valkey;
 
 use std::time::Duration;
 
