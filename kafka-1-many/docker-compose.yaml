@@ -64,7 +64,7 @@ services:
       - kafka0
       - kafka1
       - kafka2
-    image: shotover/shotover-proxy:v0.6.0
+    image: shotover/shotover-proxy:v0.7.0
     networks:
       cluster_subnet:
         ipv4_address: 172.16.1.5

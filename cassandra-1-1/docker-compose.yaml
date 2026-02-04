@@ -38,7 +38,7 @@ services:
     restart: always
     depends_on:
       - cassandra-one
-    image: shotover/shotover-proxy:v0.6.0
+    image: shotover/shotover-proxy:v0.7.0
     network_mode: "service:cassandra-one"
     volumes:
       - .:/config
@@ -47,7 +47,7 @@ services:
     restart: always
     depends_on:
       - cassandra-two
-    image: shotover/shotover-proxy:v0.6.0
+    image: shotover/shotover-proxy:v0.7.0
     network_mode: "service:cassandra-two"
     volumes:
       - .:/config
@@ -56,7 +56,7 @@ services:
     restart: always
     depends_on:
       - cassandra-three
-    image: shotover/shotover-proxy:v0.6.0
+    image: shotover/shotover-proxy:v0.7.0
     network_mode: "service:cassandra-three"
     volumes:
       - .:/config

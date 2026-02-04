@@ -75,7 +75,7 @@ services:
     restart: always
     depends_on:
       - valkey-node-0
-    image: shotover/shotover-proxy:v0.6.0
+    image: shotover/shotover-proxy:v0.7.0
     network_mode: "service:valkey-node-0"
     volumes:
       - .:/config
@@ -84,7 +84,7 @@ services:
     restart: always
     depends_on:
       - valkey-node-1
-    image: shotover/shotover-proxy:v0.6.0
+    image: shotover/shotover-proxy:v0.7.0
     network_mode: "service:valkey-node-1"
     volumes:
       - .:/config
@@ -93,7 +93,7 @@ services:
     restart: always
     depends_on:
       - valkey-node-2
-    image: shotover/shotover-proxy:v0.6.0
+    image: shotover/shotover-proxy:v0.7.0
     network_mode: "service:valkey-node-2"
     volumes:
       - .:/config
@@ -102,7 +102,7 @@ services:
     restart: always
     depends_on:
       - valkey-node-3
-    image: shotover/shotover-proxy:v0.6.0
+    image: shotover/shotover-proxy:v0.7.0
     network_mode: "service:valkey-node-3"
     volumes:
       - .:/config
@@ -111,7 +111,7 @@ services:
     restart: always
     depends_on:
       - valkey-node-4
-    image: shotover/shotover-proxy:v0.6.0
+    image: shotover/shotover-proxy:v0.7.0
     network_mode: "service:valkey-node-4"
     volumes:
       - .:/config
@@ -120,7 +120,7 @@ services:
     restart: always
     depends_on:
       - valkey-node-5
-    image: shotover/shotover-proxy:v0.6.0
+    image: shotover/shotover-proxy:v0.7.0
     network_mode: "service:valkey-node-5"
     volumes:
       - .:/config

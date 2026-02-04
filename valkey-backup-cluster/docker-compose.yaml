@@ -172,7 +172,7 @@ services:
         condition: service_healthy
       valkey-node-backup-5:
         condition: service_healthy
-    image: shotover/shotover-proxy:v0.6.0
+    image: shotover/shotover-proxy:v0.7.0
     volumes:
       - .:/config
 
